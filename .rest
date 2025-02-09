@@ -35,3 +35,26 @@ Content-Type: application/json
   "bio": "Sigma boy",
   "userId": "1047e689-72fc-4fbe-b9cb-cb9f4eecc490"
 }
+
+###
+
+POST http://localhost:3000/categories
+Content-Type: application/json
+
+{
+  "name": "Technology"
+}
+
+### 
+POST http://localhost:3000/categories/post
+Content-Type: application/json
+
+{
+  "postId": "83a819a0-f9b0-4c66-b3e9-24c4e1130550",
+  "categoriesId": "56e46d80-e828-4ed7-a94e-7c11131f4885"
+}
+
+### 
+GET http://localhost:3000/categories
+
+###

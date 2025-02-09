@@ -13,11 +13,7 @@ export class PostsService {
   ) {}
 
   async getPosts() {
-    return await this.drizzle.query.posts.findMany({
-      with: {
-        user: true,
-      },
-    });
+    return await this.drizzle.query.posts.findMany({});
   }
 
   async createPost(post: Omit<typeof schema.posts.$inferInsert, 'id'>) {
