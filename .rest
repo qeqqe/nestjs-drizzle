@@ -10,3 +10,17 @@ Content-Type: application/json
   "email": "random@gmail.com",
   "password": "123456"
 }
+
+###
+GET http://localhost:3000/posts
+
+###
+POST http://localhost:3000/posts
+Content-Type: application/json
+
+{
+  "content": "My first post",
+  "published": true,
+  "userId": "1047e689-72fc-4fbe-b9cb-cb9f4eecc490"
+}
+

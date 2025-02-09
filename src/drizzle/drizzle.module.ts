@@ -1,11 +1,13 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Pool } from 'pg';
 import { drizzle } from 'drizzle-orm/node-postgres';
-import * as schema from '../user/user.schema';
+import * as schema from '../posts/posts.schema';
+import * as userSchema from '../user/user.schema';
 
 export const DRIZZLE = Symbol('drizzle-connection');
 
+@Global()
 @Module({
   providers: [
     {
@@ -18,7 +20,7 @@ export const DRIZZLE = Symbol('drizzle-connection');
           connectionString: DATABASE_URL,
           ssl: NODE_ENV == 'production' ? true : false,
         });
-        return drizzle(pool, { schema });
+        return drizzle(pool, { schema: { ...schema, ...userSchema } });
       },
     },
   ],
