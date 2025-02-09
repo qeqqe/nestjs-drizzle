@@ -1,5 +1,5 @@
 import { relations } from 'drizzle-orm';
-import { pgTable, uuid, text } from 'drizzle-orm/pg-core';
+import { pgTable, uuid, text, integer } from 'drizzle-orm/pg-core';
 import { posts } from 'src/posts/posts.schema';
 
 export const users = pgTable('users', {
@@ -11,4 +11,18 @@ export const users = pgTable('users', {
 
 export const userRelation = relations(users, ({ many }) => ({
   post: many(posts),
+}));
+
+export const profile = pgTable('profile', {
+  id: uuid('id').notNull().primaryKey(),
+  age: integer('age'),
+  bio: text('bio'),
+  userId: uuid('user_id').references(() => users.id),
+});
+
+export const profileRelation = relations(profile, ({ one }) => ({
+  user: one(users, {
+    fields: [profile.userId],
+    references: [users.id],
+  }),
 }));

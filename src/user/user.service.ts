@@ -12,7 +12,11 @@ export class UserService {
   ) {}
 
   async getUsers() {
-    return this.drizzle.query.users.findMany();
+    return this.drizzle.query.users.findMany({
+      with: {
+        post: true,
+      },
+    });
   }
 
   async createUser(user: Omit<typeof schema.users.$inferInsert, 'id'>) {
