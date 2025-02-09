@@ -1,5 +1,6 @@
 import { relations } from 'drizzle-orm';
 import { boolean, timestamp, pgTable, text, uuid } from 'drizzle-orm/pg-core';
+import { postToCategories } from 'src/categories/categories.schema';
 import { users } from 'src/user/user.schema';
 
 export const posts = pgTable('posts', {
@@ -12,9 +13,11 @@ export const posts = pgTable('posts', {
     .references(() => users.id),
 });
 
-export const postRelation = relations(posts, ({ one }) => ({
+// ! ONE (user) TO MANY (posts)
+export const postRelation = relations(posts, ({ one, many }) => ({
   user: one(users, {
     fields: [posts.userId],
     references: [users.id],
   }),
+  postToCategories: many(postToCategories),
 }));

@@ -24,6 +24,7 @@ export const profile = pgTable('profile', {
   userId: uuid('user_id').references(() => users.id),
 });
 
+// ! One (user) to One (profile)
 export const profileRelation = relations(profile, ({ one }) => ({
   user: one(users, {
     fields: [profile.userId],
