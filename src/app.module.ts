@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { DrizzleModule } from './drizzle/drizzle.module';
 import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
+import { PostsModule } from './posts/posts.module';
 @Module({
   imports: [
     DrizzleModule,
@@ -11,6 +12,7 @@ import { UserModule } from './user/user.module';
       isGlobal: true,
     }),
     UserModule,
+    PostsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

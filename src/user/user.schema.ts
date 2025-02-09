@@ -1,4 +1,6 @@
-import { jsonb, pgTable, uuid, text } from 'drizzle-orm/pg-core';
+import { relations } from 'drizzle-orm';
+import { pgTable, uuid, text } from 'drizzle-orm/pg-core';
+import { posts } from 'src/posts/posts.schema';
 
 export const users = pgTable('users', {
   id: uuid('id').primaryKey(),
@@ -7,10 +9,6 @@ export const users = pgTable('users', {
   password: text('password').notNull(),
 });
 
-export const profileInfo = pgTable('profileInfo', {
-  id: uuid('id').primaryKey(),
-  metadata: jsonb('metadata'),
-  userId: uuid('userId')
-    .references(() => users.id)
-    .notNull(),
-});
+export const userRelation = relations(users, ({ many }) => ({
+  post: many(posts),
+}));
