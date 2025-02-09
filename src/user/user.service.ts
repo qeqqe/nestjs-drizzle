@@ -15,6 +15,7 @@ export class UserService {
     return this.drizzle.query.users.findMany({
       with: {
         post: true,
+        profile: true,
       },
     });
   }
@@ -25,5 +26,13 @@ export class UserService {
       id: randomUUID(),
     };
     return this.drizzle.insert(schema.users).values(userData);
+  }
+
+  async postProfile(profile: Omit<typeof schema.profile.$inferInsert, 'id'>) {
+    const profileData = {
+      ...profile,
+      id: randomUUID(),
+    };
+    return this.drizzle.insert(schema.profile).values(profileData);
   }
 }

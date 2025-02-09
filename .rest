@@ -24,3 +24,14 @@ Content-Type: application/json
   "userId": "1047e689-72fc-4fbe-b9cb-cb9f4eecc490"
 }
 
+
+### 
+
+POST http://localhost:3000/user/profile
+Content-Type: application/json
+
+{
+  "age": 18,
+  "bio": "Sigma boy",
+  "userId": "1047e689-72fc-4fbe-b9cb-cb9f4eecc490"
+}

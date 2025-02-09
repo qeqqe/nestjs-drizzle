@@ -9,8 +9,12 @@ export const users = pgTable('users', {
   password: text('password').notNull(),
 });
 
-export const userRelation = relations(users, ({ many }) => ({
+export const userRelation = relations(users, ({ many, one }) => ({
   post: many(posts),
+  profile: one(profile, {
+    fields: [users.id],
+    references: [profile.userId],
+  }),
 }));
 
 export const profile = pgTable('profile', {
